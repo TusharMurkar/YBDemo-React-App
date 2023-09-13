@@ -11,7 +11,7 @@ function MyComponent() {
     // const apiUrl = 'https://samples.mycontentdemo.com/content/published/api/v1.1/items/CONTC385D5CD595B42EE82585B82D89BB92D?expand=fields.renditions&channelToken=ba0efff9c021422cb134c2fd5daf6015';
 
     // const apiUrl = 'https://yblwebstage-yesbankcloud2.cec.ocp.oraclecloud.com/content/management/api/v1.1/items?q=(type eq "ybl-dynamic-comp-assets")';
-    
+
     const apiUrl = 'https://ybdemo-sandeshpawaskar42.cec.ocp.oraclecloud.com/content/published/api/v1.1/items?q=(type eq "card-structure")';
 
     const headers = {
@@ -27,7 +27,7 @@ function MyComponent() {
     })
       .then(response => {
         console.log(response);
-        // setData(response.data);
+        setData(response.data.items);
         // setLoading(false);
       })
       .catch(error => {
@@ -36,17 +36,18 @@ function MyComponent() {
       });
   }, []); // Empty dependency array to run the effect only once
 
+
   return (
     <div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
+        <div class="parents">
           {data.map(item => (
-            <li key={item.population}>{item.population}</li>
+            <div class="childres">
+            <img class="imgSrc" src={(`https://ybdemo-sandeshpawaskar42.cec.ocp.oraclecloud.com/content/published/api/v1.1/assets/${item.fields.img_src.id}/native?channelToken=0a64a66aa81740368ac48630bed9bfd5`)} />
+            <h3 class="title" key={item.fields.title}>{item.fields.title}</h3>
+            <p class="desc" key={item.fields.descriptions}>{item.fields.descriptions}</p>
+            </div>
           ))}
-        </ul>
-      )}
+        </div>
     </div>
   );
 }
